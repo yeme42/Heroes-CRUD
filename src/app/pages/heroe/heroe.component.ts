@@ -17,6 +17,7 @@ export class HeroeComponent implements OnInit{
 
   heroe: HeroeModel
   accion: string = 'Guardar'
+
   constructor(private heroeServices: HeroesService,
               private route: ActivatedRoute){
     this.heroe = {
@@ -33,6 +34,7 @@ export class HeroeComponent implements OnInit{
    if (id !== 'nuevo'){
     this.accion = 'Actualizar'
   this.heroeServices.getHeroeById(id).subscribe( (resp:any) => {
+    console.log("aca esta la respuesta ", resp)
   this.heroe = resp
   this.heroe.id = id
 

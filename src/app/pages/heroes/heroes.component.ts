@@ -23,13 +23,13 @@ export class HeroesComponent implements OnInit{
   activityValues: number[] = [0, 100];
   
 
-  constructor( private heroesServie:HeroesService,
+  constructor( private heroesService:HeroesService,
               private router: Router){
   }
 
   ngOnInit(){
     this.cargando = true
-    this.heroesServie.getHeroes().subscribe(
+    this.heroesService.getHeroes().subscribe(
       (resp)=>{
         console.log(resp)
         this.heroes = resp
@@ -46,7 +46,7 @@ export class HeroesComponent implements OnInit{
 }
 
 cargarTabla(){
-  this.heroesServie.getHeroes().subscribe(
+  this.heroesService.getHeroes().subscribe(
     (resp)=>{
       console.log(resp)
       this.heroes = resp
@@ -67,7 +67,7 @@ cargarTabla(){
     }).then((result) => {
       if (result.isConfirmed) {
         this.heroes.splice(i, 1)
-        this.heroesServie.deleteHeroe(heroe.id).subscribe((resp)=>{
+        this.heroesService.deleteHeroe(heroe.id).subscribe((resp)=>{
     })
         Swal.fire({
           title: "Eliminado!",
@@ -79,14 +79,11 @@ cargarTabla(){
     });
     }
 
-    cambiar(){
-      this.heroesServie.button$.emit('Actualizar')
-      console.log('llego a cambiar')
+    cambiar(id:any){
+      this.heroesService.button$.emit('Actualizar')
+      console.log('llego a cambiar', id)
     }
     
-    clear(table: Table) {
-      table.clear();
-  }
 
 
 
